@@ -140,7 +140,7 @@ function Header() {
                             <Image
                                 className={cx('user-avatar')}
                                 alt="nguyen van a"
-                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/c0e5acb353efad347ae0ba5a87574f1d~c5_100x100.jpeg?x-expires=1681941600&x-signature=E8Bek59RCvUmJgeKYwzbfpj6NlQ%3D"
+                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/46da6c7564f7897cbf6079ef434ae267~c5_100x100.jpeg?x-expires=1682492400&x-signature=lQIPPWsEfJHpykFwRufGitMQaxo%3D"
                                 fallback="https://fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png" //những chỗ bị lỗi ảnh mà ko muốn dùng ảnh mặc định có thể custom ảnh riêng = cách thêm cái này//
                             />
                         ) : (
