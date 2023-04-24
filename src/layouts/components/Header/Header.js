@@ -83,7 +83,7 @@ function Header() {
         },
         {
             icon: <FontAwesomeIcon icon={faChartLine} />,
-            title: 'View analyrics',
+            title: 'View analytics',
             to: '/analytics',
         },
         {

@@ -18,15 +18,15 @@ const cx = classNames.bind(styles);
 function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
-    const [showResult, setShowResult] = useState(true);
+    const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const debounced = useDebounce(searchValue, 500);
+    const debouncedValue = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
 
     useEffect(() => {
-        if (!debounced.trim()) {
+        if (!debouncedValue.trim()) {
             setSearchResult([]);
             return;
         } //gõ space hay lần đầu useState của searchValue là chuỗi rồng => sẽ không lỗi
@@ -37,7 +37,7 @@ function Search() {
         // axios
         //     .get(`https://tiktok.fullstack.edu.vn/api/users/search`, {
         //         params: {
-        //             q: debounced,
+        //             q: debouncedValue,
         //             type: 'less',
         //         },
         //     })
@@ -45,7 +45,7 @@ function Search() {
         // request
         //     .get('users/search', {
         //         params: {
-        //             q: debounced,
+        //             q: debouncedValue,
         //             type: 'less',
         //         },
         //     })
@@ -57,7 +57,7 @@ function Search() {
         //         setLoading(false);
         //     });
 
-        // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
+        // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debouncedValue)}&type=less`)
         //     .then((res) => res.json())
         //     .then((res) => {
         //         setSearchResult(res.data);
@@ -70,13 +70,13 @@ function Search() {
         const fetchApi = async () => {
             setLoading(true);
 
-            const result = await searchServices.search(debounced);
+            const result = await searchServices.search(debouncedValue);
             setSearchResult(result);
 
             setLoading(false);
         };
         fetchApi();
-    }, [debounced]);
+    }, [debouncedValue]);
 
     const handleHideResult = () => {
         setShowResult(false);
@@ -87,6 +87,12 @@ function Search() {
         if (!searchValue.startsWith(' ')) {
             setSearchValue(searchValue);
         }
+    };
+
+    const handleClear = () => {
+        setSearchValue('');
+        setSearchResult([]);
+        inputRef.current.focus();
     };
 
     return (
@@ -103,6 +109,7 @@ function Search() {
                             {searchResult.map((result) => (
                                 <AccountItem key={result.id} data={result} />
                             ))}
+                            {/* với những list nhiều item thì dùng useMemo để khi component cha rerender thì list ko bị render lại */}
                         </PopperWrapper>
                     </div>
                 )}
@@ -119,14 +126,7 @@ function Search() {
                     />
 
                     {!!searchValue && !loading && (
-                        <button
-                            className={cx('clear')}
-                            onClick={() => {
-                                setSearchValue('');
-                                setSearchResult([]);
-                                inputRef.current.focus();
-                            }}
-                        >
+                        <button className={cx('clear')} onClick={handleClear}>
                             <FontAwesomeIcon icon={faCircleXmark} />
                         </button>
                     )}
