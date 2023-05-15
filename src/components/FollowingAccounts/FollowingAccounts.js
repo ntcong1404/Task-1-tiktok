@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import styles from './SuggestedAccounts.module.scss';
-import AccountItem from './AccountItem';
+import styles from './FollowingAccounts.module.scss';
+import AccountItem from '~/components/FollowingAccounts/AccountItem';
 
 const cx = classNames.bind(styles);
 
-function SuggestedAccounts({ label, data = [] }) {
+function FollowingAccounts({ label, data = [] }) {
     return (
         <div className={cx('wrapper')}>
             <p className={cx('label')}>{label}</p>
@@ -19,9 +19,9 @@ function SuggestedAccounts({ label, data = [] }) {
     );
 }
 
-SuggestedAccounts.propTypes = {
+FollowingAccounts.propTypes = {
     label: PropTypes.string.isRequired,
     data: PropTypes.array,
 };
 
-export default SuggestedAccounts;
+export default FollowingAccounts;
